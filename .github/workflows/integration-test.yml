@@ -11,12 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: AppStore Information using version
+        id: appstore_information_version
+        uses: ./
+        with:
+          bundle_identifier: "com.facebook.Facebook"
+          version_number: "1.1.0"
+      - name: Exists Latest Version
+        run: |
+          echo ${{ steps.appstore_information_version.outputs.app_name }}
+          echo ${{ steps.appstore_information_version.outputs.release_date }}
+          echo ${{ steps.appstore_information_version.outputs.version }}
       - name: AppStore Information
         id: appstore_information
         uses: ./
         with:
           bundle_identifier: "com.facebook.Facebook"
-      - name: Ouputs
+      - name: Exists Latest Version
         run: |
           echo ${{ steps.appstore_information.outputs.app_name }}
           echo ${{ steps.appstore_information.outputs.release_date }}
