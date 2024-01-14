@@ -1,11 +1,11 @@
 name: 'MarketPlace Application Information'
 description: 'outputs application information'
 inputs:
-  market_type:
-    description: 'Market Type'
-    required: true
   bundle_identifier:
     description: 'iOS Bundle Identifier'
+    required: false
+  version_number:
+    description: 'Application Version Number'
     required: false
 outputs:
   app_name:
@@ -25,9 +25,10 @@ runs:
       id: appstore_information
       run: |
         bundle_identifier=${{ inputs.bundle_identifier }}
+        version_number=${{ inputs.version_number }}
 
         # Get the latest version from AppStore
-        app_information=`ruby ./scripts/appstore.rb ${bundle_identifier}`
+        app_information=`ruby ./scripts/appstore.rb ${bundle_identifier} ${version_number}`
 
         # Json parse
         app_name=$(echo $app_information | jq -r '.app_name')
