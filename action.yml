@@ -29,6 +29,11 @@ runs:
         # Get the latest version from AppStore
         app_information=`ruby ./scripts/appstore.rb ${bundle_identifier}`
 
-        echo "app_name=${app_information['app_name']}" >> $GITHUB_OUTPUT
-        echo "release_date=${app_information['release_date']}" >> $GITHUB_OUTPUT
-        echo "version=${app_information['version']}" >> $GITHUB_OUTPUT
+        # Json parse
+        app_name=$(echo $app_information | jq -r '.app_name')
+        release_date=$(echo $app_information | jq -r '.release_date')
+        version=$(echo $app_information | jq -r '.version')
+
+        echo "app_name=${app_name}" >> $GITHUB_OUTPUT
+        echo "release_date=${release_date}" >> $GITHUB_OUTPUT
+        echo "version=${version}" >> $GITHUB_OUTPUT
