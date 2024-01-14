@@ -1,7 +1,6 @@
 require 'net/http'
 require 'json'
 require 'time'
-require './scripts/validate.rb'
 
 class AppStoreMarket
   def initialize()
