@@ -28,8 +28,7 @@ runs:
         version_number=${{ inputs.version_number }}
 
         # Get the latest version from AppStore
-        ls -la
-        app_information=`ruby ./scripts/appstore.rb ${bundle_identifier} ${version_number}`
+        app_information=`ruby ${GITHUB_ACTION_PATH}/scripts/appstore.rb ${bundle_identifier} ${version_number}`
 
         # Json parse
         app_name=$(echo $app_information | jq -r '.app_name')
