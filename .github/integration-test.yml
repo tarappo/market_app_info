@@ -1,0 +1,23 @@
+name: "integration-test"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: AppStore Information
+        id: appstore_information
+        uses: ./
+        with:
+          bundle_identifier: "com.facebook.Facebook"
+      - name: Ouputs
+        run: |
+          echo ${{ appstore_information.outputs.app_name }}
+          echo ${{ appstore_information.outputs.release_date }}
+          echo ${{ appstore_information.outputs.version }}
