@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'time'
+require_relative 'validate'
 
 class AppStoreMarket
   def initialize()
