@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'time'
+require './scripts/validate.rb'
 
 class AppStoreMarket
   def initialize()
@@ -26,9 +27,17 @@ class AppStoreMarket
   end
 end
 
-# 'com.facebook.Facebook'
 bundle_id = ARGV[0]
+version_number = ARGV[1]
 raise("Please provide a bundle id") if bundle_id.nil?
 
+# アプリの情報の取得
 app_info = AppStoreMarket.new.get_app_info(bundle_id)
+
+# 新バージョンが出てるかの確認をする場合
+unless version_number.nil?
+  new_version_flag = Validate.new.latest_version(app_info['version'], version_number)
+  app_info = {} unless new_version_flag
+end
+
 puts app_info.to_json
