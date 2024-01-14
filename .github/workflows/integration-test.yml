@@ -22,12 +22,23 @@ jobs:
           echo ${{ steps.appstore_information_version.outputs.app_name }}
           echo ${{ steps.appstore_information_version.outputs.release_date }}
           echo ${{ steps.appstore_information_version.outputs.version }}
-      - name: AppStore Information
-        id: appstore_information
+      - name: AppStore Information using new version
+        id: appstore_information_new_version
         uses: ./
         with:
           bundle_identifier: "com.facebook.Facebook"
-      - name: Exists Latest Version
+          version_number: "550.1.0"
+      - name: Not Exists Latest Version
+        run: |
+          echo ${{ steps.appstore_information_new_version.outputs.app_name }}
+          echo ${{ steps.appstore_information_new_version.outputs.release_date }}
+          echo ${{ steps.appstore_information_new_version.outputs.version }}
+      - name: AppStore Information without version
+        id: appstore_information
+        uses: ./
+        with:
+            bundle_identifier: "com.facebook.Facebook"
+      - name: Application Information
         run: |
           echo ${{ steps.appstore_information.outputs.app_name }}
           echo ${{ steps.appstore_information.outputs.release_date }}
