@@ -16,12 +16,8 @@ jobs:
         uses: ./
         with:
           bundle_identifier: "com.facebook.Facebook"
-  result:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
       - name: Ouputs
         run: |
-          echo ${{ needs.test.outputs.app_name }}
-          echo ${{ needs.test.outputs.release_date }}
-          echo ${{ needs.test.outputs.version }}
+          echo ${{ steps.appstore_information.outputs.app_name }}
+          echo ${{ steps.appstore_information.outputs.release_date }}
+          echo ${{ steps.appstore_information.outputs.version }}
