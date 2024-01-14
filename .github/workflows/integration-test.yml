@@ -1,0 +1,45 @@
+name: "integration-test"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: AppStore Information using version
+        id: appstore_information_version
+        uses: ./
+        with:
+          bundle_identifier: "com.facebook.Facebook"
+          version_number: "1.1.0"
+      - name: Exists Latest Version
+        run: |
+          echo ${{ steps.appstore_information_version.outputs.app_name }}
+          echo ${{ steps.appstore_information_version.outputs.release_date }}
+          echo ${{ steps.appstore_information_version.outputs.version }}
+      - name: AppStore Information using new version
+        id: appstore_information_new_version
+        uses: ./
+        with:
+          bundle_identifier: "com.facebook.Facebook"
+          version_number: "550.1.0"
+      - name: Not Exists Latest Version
+        run: |
+          echo ${{ steps.appstore_information_new_version.outputs.app_name }}
+          echo ${{ steps.appstore_information_new_version.outputs.release_date }}
+          echo ${{ steps.appstore_information_new_version.outputs.version }}
+      - name: AppStore Information without version
+        id: appstore_information
+        uses: ./
+        with:
+            bundle_identifier: "com.facebook.Facebook"
+      - name: Application Information
+        run: |
+          echo ${{ steps.appstore_information.outputs.app_name }}
+          echo ${{ steps.appstore_information.outputs.release_date }}
+          echo ${{ steps.appstore_information.outputs.version }}

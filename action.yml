@@ -1,11 +1,11 @@
 name: 'MarketPlace Application Information'
 description: 'outputs application information'
 inputs:
-  market_type:
-    description: 'Market Type'
-    required: true
   bundle_identifier:
     description: 'iOS Bundle Identifier'
+    required: false
+  version_number:
+    description: 'Application Version Number'
     required: false
 outputs:
   app_name:
@@ -24,11 +24,17 @@ runs:
       shell: bash
       id: appstore_information
       run: |
-        bundle_identifier=${{ inputs.bundle_identifier }}}
+        bundle_identifier=${{ inputs.bundle_identifier }}
+        version_number=${{ inputs.version_number }}
 
         # Get the latest version from AppStore
-        app_information=`ruby ./scripts/appstore.rb $bundle_identifier`
+        app_information=`ruby ./scripts/appstore.rb ${bundle_identifier} ${version_number}`
 
-        echo "app_name=${app_information['app_name']}" >> $GITHUB_OUTPUT
-        echo "release_date=${app_information['release_date']}" >> $GITHUB_OUTPUT
-        echo "version=${app_information['version']}" >> $GITHUB_OUTPUT
+        # Json parse
+        app_name=$(echo $app_information | jq -r '.app_name')
+        release_date=$(echo $app_information | jq -r '.release_date')
+        version=$(echo $app_information | jq -r '.version')
+
+        echo "app_name=${app_name}" >> $GITHUB_OUTPUT
+        echo "release_date=${release_date}" >> $GITHUB_OUTPUT
+        echo "version=${version}" >> $GITHUB_OUTPUT
