@@ -24,10 +24,10 @@ runs:
       shell: bash
       id: appstore_information
       run: |
-        bundle_identifier=${{ inputs.bundle_identifier }}}
+        bundle_identifier=${{ inputs.bundle_identifier }}
 
         # Get the latest version from AppStore
-        app_information=`ruby ./scripts/appstore.rb $bundle_identifier`
+        app_information=`ruby ./scripts/appstore.rb ${bundle_identifier}`
 
         echo "app_name=${app_information['app_name']}" >> $GITHUB_OUTPUT
         echo "release_date=${app_information['release_date']}" >> $GITHUB_OUTPUT
