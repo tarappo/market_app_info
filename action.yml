@@ -14,6 +14,9 @@ outputs:
   release_date:
     description: 'release date'
     value: ${{ steps.appstore_information.outputs.release_date }}
+  release_formatted_date:
+    description: 'release formatted date'
+    value: ${{ steps.appstore_information.outputs.release_formatted_date }}
   version:
     description: 'application version'
     value: ${{ steps.appstore_information.outputs.version }}
@@ -33,8 +36,10 @@ runs:
         # Json parse
         app_name=$(echo $app_information | jq -r '.app_name')
         release_date=$(echo $app_information | jq -r '.release_date')
+        release_formatted_date=$(echo $app_information | jq -r '.release_formatted_date')
         version=$(echo $app_information | jq -r '.version')
 
         echo "app_name=${app_name}" >> $GITHUB_OUTPUT
         echo "release_date=${release_date}" >> $GITHUB_OUTPUT
+        echo "release_formatted_date=${release_formatted_date}" >> $GITHUB_OUTPUT
         echo "version=${version}" >> $GITHUB_OUTPUT
