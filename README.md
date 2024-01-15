@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: AppStore Information
         id: appstore_information
-        uses: tarappo/market_app_info@v1.0.0
+        uses: tarappo/market_app_info@v1.1.0
         with:
           bundle_identifier: "Your Application Bundle Identifier"
       - name: Ouputs
