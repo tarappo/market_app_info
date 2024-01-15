@@ -17,11 +17,13 @@ class AppStoreMarket
     app_info = json['results'].first
     raise("No app found with the provided bundle id") if app_info.nil?
   
-    release_date = Time.parse(app_info['currentVersionReleaseDate']).getlocal("+09:00")
-    formatted_date = release_date.strftime("%Y年%m月%d日 %H時%M分%S秒")
+    current_version_release_date = app_info['currentVersionReleaseDate']
+    release_date = Time.parse(current_version_release_date).getlocal("+09:00")
+    formatted_date = release_date.strftime("%Y/%m/%d %H:%M:%S")
     {
       "app_name" => app_info['trackName'],
-      "release_date" => formatted_date,
+      "release_date" => current_version_release_date,
+      "release_formatted_date" => formatted_date,
       "version" => app_info['version'],
     }
   end
