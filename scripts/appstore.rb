@@ -7,9 +7,8 @@ class AppStoreMarket
   def initialize()
   end
 
-  def get_app_info(bundle_id)
-    # only jp => TODO: add country code
-    uri = URI("https://itunes.apple.com/jp/lookup?bundleId=#{bundle_id}")
+  def get_app_info(country_code, bundle_id)
+    uri = URI("https://itunes.apple.com/#{country_code}/lookup?bundleId=#{bundle_id}")
     response = Net::HTTP.get(uri)
     json = JSON.parse(response)
   
@@ -30,12 +29,14 @@ class AppStoreMarket
   end
 end
 
-bundle_id = ARGV[0]
-version_number = ARGV[1]
+# parameters
+country_code = ARGV[0]
+bundle_id = ARGV[1]
+version_number = ARGV[2]
 raise("Please provide a bundle id") if bundle_id.nil?
 
 # アプリの情報の取得
-app_info = AppStoreMarket.new.get_app_info(bundle_id)
+app_info = AppStoreMarket.new.get_app_info(country_code, bundle_id)
 
 # 新バージョンが出てるかの確認をする場合
 unless version_number.nil?

@@ -1,6 +1,10 @@
 name: 'MarketPlace Application Information'
 description: 'outputs application information'
 inputs:
+  country_code:
+    description: 'Country Code'
+    required: false
+    default: 'jp'
   bundle_identifier:
     description: 'iOS Bundle Identifier'
     required: false
@@ -29,9 +33,10 @@ runs:
       run: |
         bundle_identifier=${{ inputs.bundle_identifier }}
         version_number=${{ inputs.version_number }}
+        country_code=${{ inputs.country_code }}
 
         # Get the latest version from AppStore
-        app_information=`ruby ${GITHUB_ACTION_PATH}/scripts/appstore.rb ${bundle_identifier} ${version_number}`
+        app_information=`ruby ${GITHUB_ACTION_PATH}/scripts/appstore.rb ${country_code} ${bundle_identifier} ${version_number}`
 
         # Json parse
         app_name=$(echo $app_information | jq -r '.app_name')

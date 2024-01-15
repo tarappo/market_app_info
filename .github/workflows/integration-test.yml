@@ -11,6 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: AppStore Information using local files
+        id: appstore_information_local_files
+        uses: ./
+        with:
+          bundle_identifier: "com.facebook.Facebook"
+          version_number: "1.1.0"
+      - name: Using Local Files
+        run: |
+          echo ${{ steps.appstore_information_local_files.outputs.app_name }}
+          echo ${{ steps.appstore_information_local_files.outputs.release_date }}
+          echo ${{ steps.appstore_information_local_files.outputs.version }}
       - name: AppStore Information using version
         id: appstore_information_version
         uses: tarappo/market_app_info@v1.1.1
