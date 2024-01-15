@@ -8,7 +8,8 @@ class AppStoreMarket
   end
 
   def get_app_info(bundle_id)
-    uri = URI("https://itunes.apple.com/lookup?bundleId=#{bundle_id}")
+    # only jp => TODO: add country code
+    uri = URI("https://itunes.apple.com/jp/lookup?bundleId=#{bundle_id}")
     response = Net::HTTP.get(uri)
     json = JSON.parse(response)
   
