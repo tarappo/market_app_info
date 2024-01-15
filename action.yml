@@ -1,5 +1,9 @@
 name: 'MarketPlace Application Information'
 description: 'outputs application information'
+branding:
+  color: 'yellow'
+  icon: 'bell'
+
 inputs:
   country_code:
     description: 'Country Code'
