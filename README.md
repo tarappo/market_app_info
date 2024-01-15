@@ -9,6 +9,7 @@ AppStore Maker Information.
 |:---|:---|:---|:---|:---|
 |bundle_identifier|Application Bundle Identifier|false|-|string|
 |version_number|Application Version Number|false|-|string|
+|country_code|Country Code using lookup API|false|jp|string|
 
 
 ### Outputs
