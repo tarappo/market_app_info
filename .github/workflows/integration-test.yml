@@ -21,6 +21,7 @@ jobs:
         run: |
           echo ${{ steps.appstore_information_local_files.outputs.app_name }}
           echo ${{ steps.appstore_information_local_files.outputs.release_date }}
+          echo ${{ steps.appstore_information_local_files.outputs.release_formatted_date }}
           echo ${{ steps.appstore_information_local_files.outputs.version }}
       - name: AppStore Information using version
         id: appstore_information_version
@@ -32,6 +33,7 @@ jobs:
         run: |
           echo ${{ steps.appstore_information_version.outputs.app_name }}
           echo ${{ steps.appstore_information_version.outputs.release_date }}
+          echo ${{ steps.appstore_information_version.outputs.release_formatted_date }}
           echo ${{ steps.appstore_information_version.outputs.version }}
       - name: AppStore Information using new version
         id: appstore_information_new_version
@@ -43,6 +45,7 @@ jobs:
         run: |
           echo ${{ steps.appstore_information_new_version.outputs.app_name }}
           echo ${{ steps.appstore_information_new_version.outputs.release_date }}
+          echo ${{ steps.appstore_information_new_version.outputs.release_formatted_date }}
           echo ${{ steps.appstore_information_new_version.outputs.version }}
       - name: AppStore Information without version
         id: appstore_information
@@ -53,4 +56,5 @@ jobs:
         run: |
           echo ${{ steps.appstore_information.outputs.app_name }}
           echo ${{ steps.appstore_information.outputs.release_date }}
+          echo ${{ steps.appstore_information.outputs.release_formatted_date }}
           echo ${{ steps.appstore_information.outputs.version }}
