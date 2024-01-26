@@ -18,8 +18,9 @@ AppStore Maker Information.
 |:-------|:----------|
 |steps.{your_step_id}.outputs.app_name|Application App Name|
 |steps.{your_step_id}.outputs.release_date|Application Release Date|
+|steps.{your_step_id}.outputs.release_formatted_date
+|Application Release Date（Formatted Date）|
 |steps.{your_step_id}.outputs.version|Application Version|
-
 
 ## Usage Examples
 
@@ -37,5 +38,6 @@ jobs:
         run: |
           echo ${{ steps.appstore_information.outputs.app_name }}
           echo ${{ steps.appstore_information.outputs.release_date }}
+          echo ${{ steps.appstore_information.outputs.release_formatted_date }}
           echo ${{ steps.appstore_information.outputs.version }}
 ```
