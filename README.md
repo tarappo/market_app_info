@@ -17,9 +17,8 @@ AppStore Maker Information.
 |Name|Description|
 |:-------|:----------|
 |steps.{your_step_id}.outputs.app_name|Application App Name|
-|steps.{your_step_id}.outputs.release_date|Application Release Date|
-|steps.{your_step_id}.outputs.release_formatted_date
-|Application Release Date（Formatted Date）|
+|steps.{your_step_id}.outputs.release_date|Application Release Date（e.g. 2024-01-25T15:00:53Z)|
+|steps.{your_step_id}.outputs.release_formatted_date|Application Release Date（Formatted Date）（e.g. 2024/01/26 00:00:53)|
 |steps.{your_step_id}.outputs.version|Application Version|
 
 ## Usage Examples
